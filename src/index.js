@@ -27,6 +27,7 @@ export default function ({ types }) {
           style,
           camel2DashComponentName,
           camel2UnderlineComponentName,
+          lowerCaseComponentName,
           fileName,
           customName,
         }) => {
@@ -37,6 +38,7 @@ export default function ({ types }) {
             style,
             camel2DashComponentName,
             camel2UnderlineComponentName,
+            lowerCaseComponentName,
             fileName,
             customName,
             types
@@ -51,6 +53,7 @@ export default function ({ types }) {
             opts.style,
             opts.camel2DashComponentName,
             opts.camel2UnderlineComponentName,
+            opts.lowerCaseComponentName,
             opts.fileName,
             opts.customName,
             types

@@ -55,7 +55,8 @@ export default class Plugin {
         ? camel2Underline(methodName)
         : this.camel2DashComponentName
           ? camel2Dash(methodName)
-          : this.lowerCaseComponentName ? lowerCase(methodName) : methodName;
+          : this.lowerCaseComponentName
+            ? lowerCase(methodName) : methodName;
       const path = winPath(
         this.customName ? this.customName(transformedMethodName) : join(this.libraryName, libraryDirectory, transformedMethodName, this.fileName) // eslint-disable-line
       );
