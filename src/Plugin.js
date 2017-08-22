@@ -1,5 +1,10 @@
 import { join } from 'path';
 
+function lowerCase(_str) {
+  const str = _str[0].toLowerCase() + _str.substr(1);
+  return str.replace(/([A-Z])/g, ($1) => `${$1.toLowerCase()}`);
+}
+
 function camel2Dash(_str) {
   const str = _str[0].toLowerCase() + _str.substr(1);
   return str.replace(/([A-Z])/g, ($1) => `-${$1.toLowerCase()}`);
@@ -21,6 +26,7 @@ export default class Plugin {
     style,
     camel2DashComponentName,
     camel2UnderlineComponentName,
+    lowerCaseComponentName,
     fileName,
     customName,
     types
@@ -32,9 +38,8 @@ export default class Plugin {
     this.libraryDirectory = typeof libraryDirectory === 'undefined'
       ? 'lib'
       : libraryDirectory;
-    this.camel2DashComponentName = typeof camel2DashComponentName === 'undefined'
-      ? true
-      : camel2DashComponentName;
+    this.lowerCaseComponentName = lowerCaseComponentName;
+    this.camel2DashComponentName = camel2DashComponentName;
     this.camel2UnderlineComponentName = camel2UnderlineComponentName;
     this.style = style || false;
     this.fileName = fileName || '';
@@ -50,7 +55,7 @@ export default class Plugin {
         ? camel2Underline(methodName)
         : this.camel2DashComponentName
           ? camel2Dash(methodName)
-          : methodName;
+          : this.lowerCaseComponentName ? lowerCase(methodName) : methodName;
       const path = winPath(
         this.customName ? this.customName(transformedMethodName) : join(this.libraryName, libraryDirectory, transformedMethodName, this.fileName) // eslint-disable-line
       );
